@@ -63,11 +63,11 @@ namespace numeric {
                 ifact[i] = ifact[i+1] * (i+1);
         }
         
-        auto operator()(int n, int k) const {
+        IntMod<mod> operator()(int n, int k) const {
             return C(n, k);
         }
         
-        auto C(int n, int k) const {
+        IntMod<mod> C(int n, int k) const {
             if (k < 0 || k > n || n < 0) return 0;
             return fact[n] * ifact[k] * ifact[n-k];
         }
