@@ -1,7 +1,61 @@
 #ifndef __DEBUG_HPP__
 #define __DEBUG_HPP__
 // ---- ---- ---- ---- ---- ---- DEBUG LIBRARY ---- ---- ---- ---- ---- ----
-#define watch(...) debug && std::cerr << "{" << #__VA_ARGS__ << "} = " \
+
+// -- -- -- -- FORWARD DECLARATION -- -- -- --
+
+/*
+template<typename... X>
+std::ostream& operator<<(std::ostream& os, const std::pair<X...>& p);
+
+template<std::size_t I, typename FuncT, typename... Tp>
+inline typename std::enable_if<I == sizeof...(Tp), void>::type
+for_each_const(const std::tuple<Tp...> &, FuncT);
+
+template<std::size_t I, typename FuncT, typename... Tp>
+inline typename std::enable_if<I < sizeof...(Tp), void>::type
+for_each_const(const std::tuple<Tp...>& t, FuncT f);
+
+template<std::size_t I, typename FuncT, typename... Tp>
+inline typename std::enable_if<I == sizeof...(Tp), void>::type
+for_each(std::tuple<Tp...> &, FuncT);
+
+template<std::size_t I, typename FuncT, typename... Tp>
+inline typename std::enable_if<I < sizeof...(Tp), void>::type
+for_each(std::tuple<Tp...>& t, FuncT f);
+
+template<typename... X>
+std::ostream& operator<<(std::ostream& os, const std::tuple<X...>& t);
+
+template<typename Iterator>
+std::ostream& print(std::ostream& os, Iterator begin, Iterator end);
+
+#define OUTPUT(container) template<typename X, typename... T>           \
+std::ostream& operator<<(std::ostream& os, const container<X,T...>& c)  \
+{ return print(os, all(c)); }
+OUTPUT(std::vector) OUTPUT(std::list) OUTPUT(std::deque)
+OUTPUT(std::set) OUTPUT(std::unordered_set)
+OUTPUT(std::multiset) OUTPUT(std::unordered_multiset)
+OUTPUT(std::map) OUTPUT(std::multimap) OUTPUT(std::unordered_map)
+#undef RANGE_OUTPUT
+
+#define OUTPUT2(container, get, pop) template<typename X, typename... T> \
+std::ostream& operator<<(std::ostream& os, container<X,T...> c) {       \
+    std::vector<X> v(c.size());                                         \
+    for (unsigned i = 0; i != v.size(); v[i++] = c.get(),c.pop());      \
+    return os << v; }                                                   
+OUTPUT2(std::queue,front,pop)
+OUTPUT2(std::stack,top,pop)
+OUTPUT2(std::priority_queue,top,pop)
+#undef OUTPUT
+
+struct Printer;
+
+*/
+
+// -------------------------------------------
+
+#define watch(...) debug && std::cerr << "DEBUG {" << #__VA_ARGS__ << "} = " \
     << std::make_tuple(__VA_ARGS__) << std::endl
 
 template<typename... X>
@@ -42,24 +96,5 @@ template<typename Iterator>
 std::ostream& print(std::ostream& os, Iterator begin, Iterator end)
 { return os << "{", std::for_each(begin,end,Printer(os)), os << "}"; }
 
-#define OUTPUT(container) template<typename X, typename... T>           \
-std::ostream& operator<<(std::ostream& os, const container<X,T...>& c)  \
-{ return print(os, all(c)); }
-OUTPUT(std::vector) OUTPUT(std::list) OUTPUT(std::deque)
-OUTPUT(std::set) OUTPUT(std::unordered_set)
-OUTPUT(std::multiset) OUTPUT(std::unordered_multiset)
-OUTPUT(std::map) OUTPUT(std::multimap) OUTPUT(std::unordered_map)
-#undef RANGE_OUTPUT
-    
-#define OUTPUT2(container, get, pop) template<typename X, typename... T> \
-std::ostream& operator<<(std::ostream& os, container<X,T...> c) {       \
-    std::vector<X> v(c.size());                                         \
-    for (unsigned i = 0; i != v.size(); v[i++] = c.get(),c.pop());      \
-    return os << v; }                                                   
-OUTPUT2(std::queue,front,pop)
-OUTPUT2(std::stack,top,pop)
-OUTPUT2(std::priority_queue,top,pop)
-#undef OUTPUT
-
-const int debug = 0;
+const int debug = 1;
 #endif // __DEBUG_HPP__

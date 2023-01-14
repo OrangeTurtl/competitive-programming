@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-const std::string libpath = "C:\\Users\\dkozyrev\\Documents\\GitHub\\competitive-programming\\algos";
+const std::string libpath = "C:\\Users\\User1\\Documents\\University\\CompetitiveEssentials\\competitive-programming\\algos";
 namespace fs = std::filesystem;
 bool isSuffix(std::string where, std::string what) {
     if (what.size() > where.size())return false;
