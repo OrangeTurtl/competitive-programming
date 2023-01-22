@@ -9,7 +9,7 @@
  *      2) set-query on position `p` with value `x`
  */
 
-namespace SegmentTree {
+namespace segment_tree {
     /**
      * Traits for min on segment and set single element queries (by default)
      */

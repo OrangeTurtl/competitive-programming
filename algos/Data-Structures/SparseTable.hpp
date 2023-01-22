@@ -115,4 +115,5 @@ struct Max {
 };
 } // namespace SparseTable
 } // namespace algos
+using namespace algos::SparseTable;
 #endif // __SPARSETABLE_HPP__

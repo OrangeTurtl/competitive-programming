@@ -2,9 +2,11 @@
 #define __DEBUG_HPP__
 // ---- ---- ---- ---- ---- ---- DEBUG LIBRARY ---- ---- ---- ---- ---- ----
 
+#ifdef LOCAL
+const int debug = 1;
+
 // -- -- -- -- FORWARD DECLARATION -- -- -- --
 
-/*
 template<typename... X>
 std::ostream& operator<<(std::ostream& os, const std::pair<X...>& p);
 
@@ -51,12 +53,7 @@ OUTPUT2(std::priority_queue,top,pop)
 
 struct Printer;
 
-*/
-
 // -------------------------------------------
-
-#define watch(...) debug && std::cerr << "DEBUG {" << #__VA_ARGS__ << "} = " \
-    << std::make_tuple(__VA_ARGS__) << std::endl
 
 template<typename... X>
 std::ostream& operator<<(std::ostream& os, const std::pair<X...>& p) 
@@ -96,5 +93,11 @@ template<typename Iterator>
 std::ostream& print(std::ostream& os, Iterator begin, Iterator end)
 { return os << "{", std::for_each(begin,end,Printer(os)), os << "}"; }
 
-const int debug = 1;
+#define watch(...) debug && std::cerr << "{" << #__VA_ARGS__ << "} = " \
+    << std::make_tuple(__VA_ARGS__) << std::endl
+
+#else
+#define watch(...) 
+#endif
+
 #endif // __DEBUG_HPP__
