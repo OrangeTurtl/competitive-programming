@@ -13,17 +13,13 @@ using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
 using vi = std::vector<int>;
-using vl = std::vector<ll>;
 using vvi = std::vector<vi>;
-using vvl = std::vector<vl>;
+using vvvi = std::vector<vvi>;
+using vb = std::vector<bool>;
+using vvb = std::vector<vb>;
 using pii = std::pair<int,int>;
-using pil = std::pair<int,ll>;
-using pli = std::pair<ll,int>;
-using pll = std::pair<ll,ll>;
 using vpii = std::vector<pii>;
 using vvpii = std::vector<vpii>;
-using vpll = std::vector<pll>;
-using vvpll = std::vector<vpll>;
 using vs = std::vector<std::string>;
 // Comparators:
 #define GEN_COMPARATORS(CLASS) \
